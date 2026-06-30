@@ -46,7 +46,7 @@
 
         /* 1. КОНЦЕПЦИЯ - картинка на весь экран */
         #slide-concept {
-            height: 100vh; /* Принудительно делаем первый экран по размеру окна, чтобы текст был по центру */
+            /* Убрали жесткую высоту 100vh, теперь он наследует 16:9, чтобы не обрезаться на телефонах */
             background-image: url('assets/image1.jpg');
             background-size: cover;
             background-position: center;
@@ -162,34 +162,20 @@
             padding: 0;
         }
         .gallery-content {
-            width: 95%;
-            margin: 2vw auto 4vw auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 20vw; /* Фиксированная высота для строк сетки */
-            gap: 1vw; /* Зазоры между фото как на скриншоте */
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            gap: 2vw; /* Зазоры между фото */
+            padding: 2vw 0;
+            margin: 0;
         }
         .gallery-content img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100vw;
+            height: auto;
+            object-fit: contain;
             display: block;
             margin: 0;
             padding: 0;
-        }
-        
-        /* Интересная "блочная" сетка для 3 фото */
-        .gallery-content img:nth-child(1) {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-        .gallery-content img:nth-child(2) {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-        .gallery-content img:nth-child(3) {
-            grid-column: span 1;
-            grid-row: span 1;
         }
 
         /* Анимации появления */
@@ -201,25 +187,6 @@
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        /* --- Адаптация под мобильные устройства --- */
-        @media (max-width: 768px) {
-            .gallery-content {
-                display: flex;
-                flex-direction: column;
-                gap: 5vw;
-                margin: 5vw auto;
-                width: 100%;
-            }
-            .gallery-content img {
-                width: 100%;
-                height: auto;
-                object-fit: contain;
-                /* Сбрасываем хак для сетки 3-го фото на мобилке */
-                grid-column: auto;
-                grid-row: auto;
-            }
         }
     </style>
 </head>
